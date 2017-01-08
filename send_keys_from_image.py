@@ -19,7 +19,7 @@ def main():
     # Sanity check
     if not ref_points:
         print('Region not selected')
-        return
+        return False
 
     # Save cropped image
     cropped_image = image[ref_points['topleft'][1]:ref_points['bottomright'][1],
@@ -29,8 +29,11 @@ def main():
     # Convert image to text
     text_ouput_path = './text_from_image'
     call(["tesseract", screenshot_path, text_ouput_path])
+    
+    return True
 
-    # Open result file
-    with open(text_ouput_path + '.txt') as f:
-        print(f)
-        # keyboard.write(data.strip())
+def send_keys():
+    with open('./text_from_image.txt') as f:
+        for line in f:
+            print(line)
+            keyboard.write(line.strip())
