@@ -7,7 +7,8 @@ from get_image_region import draw_region
 screenshot_path = './screenshot.png'
 pyautogui.screenshot(screenshot_path)
 image = cv2.imread(screenshot_path)
-region = draw_region(image)
+ref_points = draw_region(image)
+print(ref_points)
 
 
 def send_keys(data):
