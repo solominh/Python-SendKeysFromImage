@@ -29,11 +29,18 @@ def main():
     # Convert image to text
     text_ouput_path = './text_from_image'
     call(["tesseract", screenshot_path, text_ouput_path])
-    
+
     return True
+
 
 def send_keys():
     with open('./text_from_image.txt') as f:
+        first_time = True
         for line in f:
-            print(line)
-            keyboard.write(line.strip())
+            cleaned_line = line.strip()
+            if first_time:
+                first_time = False
+            else:
+                cleaned_line = ' ' + cleaned_line
+            print(cleaned_line)
+            keyboard.write(cleaned_line)
