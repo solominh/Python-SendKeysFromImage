@@ -23,7 +23,7 @@ def draw_rect(event, x, y, flags, param):
 
 
 def draw_region(image):
-    global original_image, cloned_image
+    global original_image, cloned_image, ref_points
 
     original_image = image
     cloned_image = image.copy()
@@ -36,7 +36,11 @@ def draw_region(image):
     while(1):
         cv2.imshow('image', cloned_image)
         k = cv2.waitKey(1) & 0xFF
-        if k == 27:
+        print(k)
+        if k == 27:  # esc
+            ref_points = {}
+            break
+        elif k == 13:  # enter
             break
     cv2.destroyAllWindows()
 
