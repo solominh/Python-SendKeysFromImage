@@ -1,24 +1,25 @@
 import cv2
 
 drawing = False  # true if mouse is pressed
-ref_points = []
+ref_points = {}
 
 
 def draw_rect(event, x, y, flags, param):
     global ref_points, drawing, original_image, cloned_image
     if event == cv2.EVENT_LBUTTONDOWN:
         drawing = True
-        ref_points = [(x, y)]
+        ref_points = {'topleft': (x, y), }
     elif event == cv2.EVENT_MOUSEMOVE:
         if drawing:
             cloned_image = original_image.copy()
-            cv2.rectangle(cloned_image, ref_points[0], (x, y), (0, 255, 0), 1)
+            cv2.rectangle(cloned_image, ref_points['topleft'],
+                          (x, y), (0, 255, 0), 1)
     elif event == cv2.EVENT_LBUTTONUP:
         drawing = False
         cloned_image = original_image.copy()
-        ref_points.append((x, y))
-        cv2.rectangle(cloned_image, ref_points[
-                      0], ref_points[1], (0, 255, 0), 1)
+        ref_points['bottomright'] = (x, y)
+        cv2.rectangle(cloned_image, ref_points['topleft'],
+                      ref_points['bottomright'], (0, 255, 0), 1)
 
 
 def draw_region(image):
@@ -38,5 +39,5 @@ def draw_region(image):
         if k == 27:
             break
     cv2.destroyAllWindows()
-    
+
     return ref_points
