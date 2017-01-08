@@ -1,6 +1,6 @@
 import keyboard
 import datetime
-from send_clipboard_keys import main
+from send_keys_from_image import main
 
 last_time_pressed = datetime.datetime.now()
 

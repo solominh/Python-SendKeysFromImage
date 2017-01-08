@@ -36,7 +36,7 @@ def draw_region(image):
     while(1):
         cv2.imshow('image', cloned_image)
         k = cv2.waitKey(1) & 0xFF
-        print(k)
+        # print(k)
         if k == 27:  # esc
             ref_points = {}
             break
