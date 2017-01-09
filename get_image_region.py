@@ -29,6 +29,7 @@ def draw_region(image):
     cloned_image = image.copy()
 
     cv2.namedWindow("image", cv2.WND_PROP_FULLSCREEN)
+    cv2.moveWindow("image", 0, 0)
     cv2.setWindowProperty(
         "image", cv2.WND_PROP_FULLSCREEN, cv2.WINDOW_FULLSCREEN)
     cv2.setMouseCallback('image', draw_rect)
